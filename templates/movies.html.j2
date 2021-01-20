@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block title %}Movie Review | {{ movie.name }}{% endblock %}
+
+{% block navbar %}
+    <li class="nav-item"><a class="nav-link" href="/logout/">Logout</a></li>
+{% endblock %}
+
+{% block content %}
+    <main class="page movie">
+        <section class="clean-block clean-movie dark">
+            <div class="container" style="padding-top:50px;">
+                <div class="block-heading">
+                    <h2 class="text-info">{{ movie.name }}</h2>
+                    <p style="text-indent: 64px;margin: 0;max-width: 100%;"
+                       class="text-justify">{{ movie.synopsis | escape }}</p>
+                </div>
+                {% if movie.id != -1 %}
+                    {% for review in reviews %}
+                        <div class="block-content">
+                            <div class="clean-movie-review">
+                                <h3>{{ review.title | escape }}</h3>
+                                <div class="info"><span class="text-muted">{{ review.created_on.strftime('%b %d, %Y') }} by {{ review.created_by }}</span>
+                                </div>
+                                <br/>
+                                <p style="text-indent: 32px" class="text-justify">{{ review.text | escape }}</p>
+                                <span>{{ review.star_rating }}★</span>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    <div class="block-content" style="margin-top: 50px;">
+                        <div class="clean-movie-add-review">
+                            <h3>Add review</h3>
+                            {% if review_state.value == 1 %}
+                                <div class="p-3 mb-2 bg-success text-white">Review added successfully!</div>
+                            {% elif review_state.value == 2 %}
+                                <div class="p-3 mb-2 bg-danger text-white">You've reviewed this movie already!</div>
+                            {% elif review_state.value == 3 %}
+                                <div class="p-3 mb-2 bg-danger text-white">Review is not in a valid form!</div>
+                            {% endif %}
+                            <form method="post">
+                                {% for field in review_form %}
+                                    <div class="form-group">
+                                        {{ field.label_tag() }}
+                                        {{ field }}
+                                        <small id="{{ field.id_for_label }}"
+                                               class="form-text text-muted">{{ field.help_text }}</small>
+                                    </div>
+                                {% endfor %}
+                                <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+                                <button class="btn btn-primary" type="submit">Add Review</button>
+                            </form>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </section>
+    </main>
+{% endblock %}

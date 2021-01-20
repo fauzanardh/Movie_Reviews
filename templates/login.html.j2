@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Movie Review | Log In{% endblock %}
+
+{% block content %}
+    <main class="page login-page">
+        <section class="clean-block clean-form dark">
+            <div class="container" style="padding-top:8%;padding-bottom:8%;">
+                <div class="block-heading">
+                    <h2 class="text-info">Log In</h2>
+                </div>
+                {% if login_failed %}
+                    <div class="p-3 mb-3 bg-danger text-white">Either wrong password or wrong username</div>
+                {% endif %}
+                <form method="post">
+                    {% for field in form %}
+                        <div class="form-group">
+                            {{ field.label_tag() }}
+                            {{ field }}
+                            <small id="{{ field.id_for_label }}"
+                                   class="form-text text-muted">{{ field.help_text }}</small>
+                        </div>
+                    {% endfor %}
+                    <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+                    <button class="btn btn-primary" type="submit">Log In</button>
+                </form>
+            </div>
+        </section>
+    </main>
+{% endblock %}

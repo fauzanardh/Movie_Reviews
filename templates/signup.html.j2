@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Movie Review | Sign Up{% endblock %}
+
+{% block content %}
+    <main class="page login-page">
+        <section class="clean-block clean-form dark">
+            <div class="container" style="padding-top:8%;padding-bottom:8%;">
+                <div class="block-heading">
+                    <h2 class="text-info">Sign Up</h2>
+                </div>
+                <form method="post">
+                    {% for field in form %}
+                        <div class="form-group">
+                            {{ field.label_tag() }}
+                            {{ field }}
+                            <small id="{{ field.id_for_label }}"
+                                   class="form-text text-muted">{{ field.help_text | safe }}</small>
+                        </div>
+                    {% endfor %}
+                    <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+                    <button class="btn btn-primary" type="submit">Sign Up</button>
+                </form>
+            </div>
+        </section>
+    </main>
+{% endblock %}

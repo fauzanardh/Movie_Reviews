@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Movie Review{% endblock %}
+
+{% block content %}
+    <main class="page index-page">
+        <section class="clean-block clean-index dark">
+            <div class="container" style="padding-top:11%;padding-bottom:11%;">
+                <div class="block-heading">
+                    <h2 class="text-info">Welcome to MovieReviews</h2>
+                    <p style="margin: 0;max-width: 100%;">Starts by signing up or login to your account</p>
+                </div>
+                <div style="text-align: center;">
+                    <a href="/signup/" class="btn btn-primary btn-lg" role="button" style="margin-right:32px">Sign
+                        Up</a>
+                    <a href="/login/" class="btn btn-primary btn-lg" role="button" style="margin-left:32px">Log In</a>
+                </div>
+            </div>
+        </section>
+    </main>
+{% endblock %}

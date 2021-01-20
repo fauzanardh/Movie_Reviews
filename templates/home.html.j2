@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Movie Review | Home{% endblock %}
+
+{% block navbar %}
+    <li class="nav-item"><a class="nav-link" href="/logout/">Logout</a></li>
+{% endblock %}
+
+{% block content %}
+    <main class="page home-page">
+        <section class="clean-block clean-home dark">
+            <div class="container" style="padding-top:50px;">
+                <div class="block-heading">
+                    <h2 class="text-info">Movies</h2>
+                </div>
+                <div class="row">
+                    {% for movie in movies %}
+                        <div class="col-md-6 col-lg-4 mb-5">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">{{ movie[1] }}</h4>
+                                    <h4 class="card-title">Avg {{ movie[3] }}★</h4>
+                                    <p class="card-text">{{ movie[2] }}</p>
+                                </div>
+                                <div style="margin: 32px;"><a class="btn btn-primary" href="/movie/{{ movie[0] }}"
+                                                              role="button">Check Reviews</a></div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+    </main>
+{% endblock %}
